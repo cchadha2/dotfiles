@@ -1,23 +1,3 @@
-# set command prompt
-#if [ "$TERM" = "xterm-color" ] || [ "$TERM" = "xterm-256color" ]; then
-#
-#    # use color if terminal supports it
-#    BLACK="\[$(tput setaf 0)\]"
-#    RED="\[$(tput setaf 1)\]"
-#    GREEN="\[$(tput setaf 2)\]"
-#    YELLOW="\[$(tput setaf 3)\]"
-#    BLUE="\[$(tput setaf 4)\]"
-#    MAGENTA="\[$(tput setaf 5)\]"
-#    CYAN="\[$(tput setaf 6)\]"
-#    WHITE="\[$(tput setaf 7)\]"
-#    DEFAULT="\[$(tput sgr0)\]"
-#
-#    # set command prompt to show current directory
-#    export PS1="${BLUE}\w> ${DEFAULT}"
-#else
-#    export PS1="\w> "
-#fi
-
 # Establish a safe environment.
 set -o ignoreeof         # Do not log out with <Ctrl-D>
 set -o noclobber         # Do not overwrite files via '>'.
