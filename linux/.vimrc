@@ -10,11 +10,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
-Bundle 'Valloric/YouCompleteMe'
-Plugin 'nvie/vim-flake8'
-Plugin 'tpope/vim-fugitive'
+Plugin 'davidhalter/jedi-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,15 +50,11 @@ au BufNewFile,BufRead *.py,*.c set
 highlight BadWhitespace ctermbg=green guibg=green
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
-" Set flake8 binary path for vim-flake8 to base flake8 installation in
-" Anaconda
-let g:flake8_cmd="/home/cchadha/anaconda3/bin/flake8"
-" Run flake8 after writing Python file
-autocmd BufWritePost *.py call flake8#Flake8()
-
-" Press F9 to save file and execute python in normal mode and insert mode
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python' shellescape(@%, 1)<CR>
+" Custom command to save file and execute with Python3.
+command Py :w <bar> exec'!python3 %'
+" Custom command to run flake8 on current file in a horizontal window.
+" TODO create a temporary buffer for this that is deleted upon closing.
+command Flake :w <bar> let $name=expand('%') <bar> set splitbelow <bar> new <bar> r!flake8 --exit-zero $name
 
 " Put your non-Plugin stuff after this line
 
