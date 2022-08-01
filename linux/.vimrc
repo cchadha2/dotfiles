@@ -1,6 +1,8 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" This line should not be removed as it ensures that various options are
+" properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
 " set the runtime path to include Vundle and initialize
@@ -8,9 +10,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-scripts/indentpython.vim'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'bakudankun/pico-8.vim'
 Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'ssteinbach/vim-pico8-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -35,8 +38,6 @@ set encoding=utf-8
 " Set line numbers and allow clipboard use for copy-pasting
 set nu
 set clipboard=unnamed
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
 
 nnoremap <space> za
 au BufNewFile,BufRead *.py,*.c set
@@ -47,12 +48,11 @@ au BufNewFile,BufRead *.py,*.c set
 \ autoindent
 \ fileformat=unix
 
-" Highlight bad whitespace as blue
-highlight BadWhitespace ctermbg=blue guibg=blue
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-" Set default colourscheme to Dracula
 colorscheme dracula
+
+" Highlight bad whitespace as green
+highlight BadWhitespace ctermbg=green guibg=green
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " Custom command to save file and execute with Python3.
 command Py :w <bar> exec'!python3 %'
@@ -89,7 +89,7 @@ endif
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
-" set background=dark
+set background=dark
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -99,9 +99,9 @@ endif
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
-endif
+"if has("autocmd")
+"  filetype plugin indent on
+"endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
